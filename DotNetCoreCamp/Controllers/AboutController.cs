@@ -14,13 +14,13 @@ namespace DotNetCoreCamp.Controllers
         AboutManager abm = new AboutManager(new EfAboutRepository());
         public IActionResult Index()
         {
-            return View();
+            var values = abm.GetList();
+            return View(values);
         }
 
         public PartialViewResult SocialMediaAbout()
         {
-            var values = abm.GetList();
-            return PartialView(values);
+            return PartialView();
         }
     }
 }
