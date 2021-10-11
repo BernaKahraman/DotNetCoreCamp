@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace DotNetCoreCamp.Controllers
 {
-
-    [Authorize]
     public class WriterController : Controller
     {
 
