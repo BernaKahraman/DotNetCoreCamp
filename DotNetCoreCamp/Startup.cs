@@ -66,6 +66,8 @@ namespace DotNetCoreCamp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseSession();
 
             app.UseRouting();
