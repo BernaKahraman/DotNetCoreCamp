@@ -46,6 +46,10 @@ namespace BusinessLayer.Concrete
         {
             return _blogDal.GetListAll(x => x.WriterID == id);
         }
+        public List<Blog> GetListWithCategoryByWriterBM(int id)
+        {
+            return _blogDal.GetListWithCategoryByWriter(id);  // Kategorinin id yerine adının getirilmesi için
+        }
 
         public void TAdd(Blog t)
         {

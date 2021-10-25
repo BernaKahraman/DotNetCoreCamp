@@ -31,7 +31,7 @@ namespace DotNetCoreCamp.Controllers
 
         public IActionResult BlogListByWriter()
         {
-            var values = bm.GetBlogListByWriter(1);
+            var values = bm.GetListWithCategoryByWriterBM(1);  //Kategorinin id yerine adının getirilmesi için 
             return View(values);
 
         }

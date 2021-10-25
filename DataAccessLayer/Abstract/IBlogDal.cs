@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
    public interface IBlogDal:IGenericDal<Blog>
     {
         List<Blog> GetListWithCategory();
+        List<Blog> GetListWithCategoryByWriter(int id); //kategoriyle beraber getir ama yazara göre - dışarıdan da id parametresi alıcak
     }
 }
