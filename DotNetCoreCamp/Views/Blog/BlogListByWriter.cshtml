@@ -8,27 +8,40 @@
 
 <h1>Yazarın Blogları</h1>
 <table class="table table-bordered">
-    <tr>
-        <th>#</th>
-        <th>Blog Başlığı</th>
-        <th>Oluşturulma Tarihi</th>
-        <th>Kategori</th>
-        <th>Durum</th>
-        <th>Sil</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <th>@item.BlogID</th>
-            <td>@item.BlogTitle</td>
-            <td>@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</td>
-            <td>@item.Category.CategoryName</td>
-            <td>@item.BlogStatus</td>
-            <td><a href="#" class="btn btn-danger">Sil</a></td>
-            <td><a href="#" class="btn btn-warning">Düzenle</a></td>
+            <th>#</th>
+            <th>Blog Başlığı</th>
+            <th>Oluşturulma Tarihi</th>
+            <th>Kategori</th>
+            <th>Durum</th>
+            <th>Sil</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
 
+            <tr>
+                <th scope="row">@item.BlogID</th>
+                <td>@item.BlogTitle</td>
+                <td>@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</td>
+                <td>@item.Category.CategoryName</td>
+                <td>
+                    @if (item.BlogStatus)
+                    {
+                        <span class="badge badge-success">Aktif</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-secondary">Pasif</span>
+                    }
+                </td>
+                <td><a href="#" class="btn btn-danger">Sil</a></td>
+                <td><a href="#" class="btn btn-warning">Düzenle</a></td>
+            </tr>
+        }
+    </tbody>
 </table>
 <a href="#" class="btn btn-primary">Yeni Blog Oluştur</a>
 
