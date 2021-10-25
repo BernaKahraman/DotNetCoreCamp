@@ -5,6 +5,7 @@ using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,14 @@ namespace DotNetCoreCamp.Controllers
         [HttpGet]
         public IActionResult BlogAdd()
         {
+            CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+            List<SelectListItem> categoryvalues = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,    //Blogların categorisini dropdowndan seçmek için 
+                                                       Value = x.CategoryID.ToString()  //Kullanıcı kategori adını seçicek ama arkada id göre getirilecek
+                                                   }).ToList();   // listesini getir 
+            ViewBag.cv = categoryvalues;  //viewbag komutuyla category valuesdan gelen değerleri dropdowna taşıcak
             return View();
         }
 
