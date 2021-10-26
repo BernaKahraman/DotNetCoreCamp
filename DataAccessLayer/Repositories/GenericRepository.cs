@@ -18,7 +18,7 @@ namespace DataAccessLayer.Repositories
             c.SaveChanges();
         }
 
-        public T GetByID(int id)
+        public T GetByID(int id) //ilgili değeri bulmak için
         {
             using var c = new Context();
             return c.Set<T>().Find(id);

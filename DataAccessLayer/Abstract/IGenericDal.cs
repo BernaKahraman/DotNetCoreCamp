@@ -13,7 +13,7 @@ namespace DataAccessLayer.Abstract
         void Delete(T t);
         void Update(T t);
         List<T> GetListAll();
-        T GetByID(int id);
+        T GetByID(int id);   // id göre getirir içini generic repositoryde doldurduk. Yani ilgili değeri bulmada
         List<T> GetListAll(Expression<Func<T, bool>>filter);
 
 

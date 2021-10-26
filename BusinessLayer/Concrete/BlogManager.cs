@@ -22,9 +22,9 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetListWithCategory();
         }
 
-        public Blog GetByID(int id)
+        public Blog TGetByID(int id)   //bu id blog controllerdaki tdelete içindeki id karşılık geliyor
         {
-            throw new NotImplementedException();
+            return _blogDal.GetByID(id);
         }
 
         public List<Blog> GetBlogByID(int id)
@@ -57,11 +57,16 @@ namespace BusinessLayer.Concrete
         }
 
         public void TDelete(Blog t)
+        { 
+            _blogDal.Delete(t);  // t parametresine karşılık olarak gelen değer blogvaluedan gelen değer (blogcontroller)
+        }
+
+        public void TUpdate(Blog t)
         {
             throw new NotImplementedException();
         }
 
-        public void TUpdate(Blog t)
+        public Blog GetByID(int id)
         {
             throw new NotImplementedException();
         }

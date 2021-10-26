@@ -73,5 +73,12 @@ namespace DotNetCoreCamp.Controllers
             return View();
         }
 
+        public IActionResult DeleteBlog(int id)
+        {
+            //silme işleminin yapılabilmesi için ilgili değerin bulunması gerekiyor
+            var blogvalue = bm.TGetByID(id);  //göndermiş olduğum id karşılık gelen satırın tamamını bulacak 
+            bm.TDelete(blogvalue);
+            return RedirectToAction("BlogListByWriter");
+        }
     }
 }
