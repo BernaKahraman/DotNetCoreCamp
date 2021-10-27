@@ -17,6 +17,7 @@ namespace DotNetCoreCamp.Controllers
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
+        CategoryManager cm = new CategoryManager(new EfCategoryRepository());
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
@@ -39,7 +40,6 @@ namespace DotNetCoreCamp.Controllers
         [HttpGet]
         public IActionResult BlogAdd()
         {
-            CategoryManager cm = new CategoryManager(new EfCategoryRepository());
             List<SelectListItem> categoryvalues = (from x in cm.GetList()
                                                    select new SelectListItem
                                                    {
@@ -86,12 +86,24 @@ namespace DotNetCoreCamp.Controllers
         {
             //güncellenecek işlemi buraya çağırmalıyız
             var blogvalue = bm.TGetByID(id);
+            List<SelectListItem> categoryvalues = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,    //dropdowna categori gelsin diye
+                                                       Value = x.CategoryID.ToString() 
+                                                   }).ToList();   
+            ViewBag.cv = categoryvalues;  
             return View(blogvalue);
         }
 
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
+            //her bölüm için düzenleme işlemi yapmadığımızda ya null dönüyor ya da default bir şey o nedenle bu kodları yazdık
+            p.WriterID = 1;
+            p.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());   //düzenleme yapıldığında o günün tarihi gelsin
+            p.BlogStatus = true; //düzenleme yapıldığında durumu true olsun diye yazdık(yazmadığımızda false dönüyor)
+            bm.TUpdate(p);
             return RedirectToAction("BlogListByWriter");
 
         }
