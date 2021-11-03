@@ -42,7 +42,7 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetListAll().Take(3).ToList();
         }
 
-        public List<Blog> GetBlogListByWriter(int id)
+        public List<Blog> GetBlogListByWriter(int id) //yazara göre blog getirme
         {
             return _blogDal.GetListAll(x => x.WriterID == id);
         }
