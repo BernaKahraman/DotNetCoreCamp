@@ -12,6 +12,7 @@
         <div class="card-body">
             <h4 class="card-title">Yazar Profil Bilgileri Düzenleme</h4>
             <br />
+            @Html.HiddenFor(x=>x.WriterID, new {@clas="form-control"})
             <form class="forms-sample">
                 <div class="form-group">
                     <label for="exampleInputName1">Yazar Ad Soyad</label>
@@ -23,7 +24,8 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword4">Şifre</label>
-                    <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password" asp-for="WriterPassword">
+                    @Html.PasswordFor(x=>x.WriterPassword, new {@class="form-control"})
+                    @*<input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password" asp-for="WriterPassword">*@
                 </div>
                 <div class="form-group">
                     <label>Yazar Görsel</label>
