@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ namespace DotNetCoreCamp.Controllers
 {
     public class WriterController : Controller
     {
+        WriterManager wm = new WriterManager(new EfWriterRepository());
         
         public IActionResult Index()
         {
@@ -40,6 +43,13 @@ namespace DotNetCoreCamp.Controllers
         public PartialViewResult WriterFooterPartial()
         {
             return PartialView();
+        }
+
+        [AllowAnonymous]
+        public IActionResult WriterEditProfile()
+        {
+            var writervalues = wm.TGetByID(1);
+            return View(writervalues);
         }
     }
 }
