@@ -16,6 +16,13 @@ namespace DataAccessLayer.Concrete
         }
 
         //bir tabloda iki ilişki olduğunda 
+
+        //HomeMatches --> WriterSender
+        //AwayMatches -->WriterReceiver
+
+
+        //HomeTeam --> SenderUser
+        //GuestTeam -->ReveiverUser
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Match>()
@@ -30,6 +37,18 @@ namespace DataAccessLayer.Concrete
                 .WithMany(y => y.AwayMatches)
                 .HasForeignKey(z => z.GuestTeamId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Message2>()
+                .HasOne(x => x.SenderUser)
+                .WithMany(y => y.WriterSender)
+                .HasForeignKey(z => z.SenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Message2>()
+              .HasOne(x => x.ReceiverUser)
+              .WithMany(y => y.WriterReceiver)
+              .HasForeignKey(z => z.ReceiverId)
+              .OnDelete(DeleteBehavior.ClientSetNull);
         }
 
         public DbSet<About> Abouts { get; set; }
@@ -44,6 +63,7 @@ namespace DataAccessLayer.Concrete
         public DbSet<Message> Messages { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Match> Matches { get; set; }
+        public DbSet<Message2> Message2s { get; set; }
 
 
     }
