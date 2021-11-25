@@ -40,7 +40,7 @@ namespace BusinessLayer.Concrete
 
         public Message2 TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return _message2Dal.GetByID(id);
         }
 
         public void TUpdate(Message2 t)
