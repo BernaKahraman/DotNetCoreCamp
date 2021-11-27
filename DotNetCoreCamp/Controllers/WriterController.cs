@@ -57,15 +57,16 @@ namespace DotNetCoreCamp.Controllers
             return PartialView();
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult WriterEditProfile()
         {
-            var writervalues = wm.TGetByID(1);
+            Context c = new Context();
+            var usermail = User.Identity.Name;
+            var writerId = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            var writervalues = wm.TGetByID(writerId);
             return View(writervalues);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public IActionResult WriterEditProfile(Writer p)
         {
