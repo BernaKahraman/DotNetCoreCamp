@@ -1,5 +1,8 @@
-﻿@using EntityLayer.Concrete
-@model List<Category>
+﻿
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Category>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
@@ -9,7 +12,7 @@
 <h1>Kategori Listesi</h1>
 <table class="table table-ordered">
     <tr>
-        <th>#</th>
+        <th>#</th>x
         <th>Kategori Adı</th>
         <th>Pasif Yap</th>
         <th>Aktif Yap</th>
@@ -26,3 +29,5 @@
         </tr>
     }
 </table>
+<br />
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index", new {page}))
